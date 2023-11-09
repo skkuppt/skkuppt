@@ -1,0 +1,27 @@
+{
+  "name": "skkugpt_new",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "cookies": "^0.8.0",
+    "cookies-next": "^2.1.1",
+    "email-validator": "^2.0.4",
+    "mysql2": "^3.6.2",
+    "next": "^14.0.0",
+    "react": "^18",
+    "react-cookie": "^4.1.1",
+    "react-dom": "^18",
+    "react-hook-form": "^7.43.9"
+  },
+  "devDependencies": {
+    "eslint": "^8",
+    "eslint-config-next": "14.0.0",
+    "typescript": "5.2.2"
+  }
+}

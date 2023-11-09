@@ -1,0 +1,152 @@
+.createSimply,
+.skkuPptMaker {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-weight: 600;
+}
+.createSimply {
+  top: 80px;
+  font-size: 35px;
+  font-weight: 500;
+  color: #062bea;
+  display: inline-block;
+  width: 396px;
+}
+.groupWrapper,
+.login1Inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 405px;
+  height: 133px;
+}
+.login1Inner {
+  top: 294px;
+  left: 175px;
+}
+.or,
+.orWrapper {
+  position: absolute;
+  width: 75px;
+  height: 47.21px;
+}
+.or {
+  top: 0;
+  left: 0;
+  font-weight: 500;
+  display: inline-block;
+}
+.orWrapper {
+  top: 81px;
+  left: 58px;
+  text-align: left;
+  font-size: 30px;
+  color: #000;
+}
+.icons,
+.signUp {
+  position: relative;
+}
+.icons {
+  width: 24px;
+  height: 24px;
+  overflow: hidden;
+  flex-shrink: 0;
+  display: none;
+}
+.signUp {
+  font-weight: 500;
+}
+.iconsParent {
+  position: absolute;
+  top: calc(50% - 16.57px);
+  left: calc(50% - 42px);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-5xs);
+}
+.signInButton {
+  position: absolute;
+  height: calc(100% - 141.86px);
+  width: 100%;
+  top: 141.86px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: var(--br-base);
+  background-color: var(--color-forestgreen);
+  overflow: hidden;
+}
+.iconsGroup {
+  position: absolute;
+  top: calc(50% - 16.57px);
+  left: calc(50% - 37.5px);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-5xs);
+}
+.signUpBotton {
+  position: absolute;
+  height: calc(100% - 141.86px);
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: 141.86px;
+  left: 0;
+  border-radius: var(--br-base);
+  background-color: var(--color-forestgreen);
+  overflow: hidden;
+}
+.groupParent {
+  top: 299px;
+  left: 971px;
+  width: 168px;
+  height: 209px;
+  text-align: center;
+  font-size: var(--font-size-3xl);
+  color: var(--color-white);
+}
+.div,
+.groupParent,
+.skkuIm1 {
+  position: absolute;
+}
+.skkuIm1 {
+  top: 10px;
+  left: 10px;
+  width: 99px;
+  height: 100px;
+  object-fit: cover;
+}
+.div {
+  top: 23px;
+  left: 56px;
+  width: 119px;
+  height: 120px;
+}
+.desktop1,
+.login1 {
+  background-color: var(--color-white);
+  height: 1024px;
+  overflow: hidden;
+}
+.login1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1440px;
+}
+.desktop1 {
+  position: relative;
+  width: 100%;
+  text-align: left;
+  font-size: 50px;
+  color: #408100;
+  font-family: var(--font-poppins);
+}
+
