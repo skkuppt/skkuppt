@@ -2,7 +2,7 @@ from datetime import datetime
 from sqlalchemy import and_
 
 from domain.question.question_schema import QuestionCreate, QuestionUpdate, QuestionDelete
-from models import Question, User, Answer
+from models import Question, User
 from sqlalchemy.orm import Session
 
 def get_question_list(db : Session):
