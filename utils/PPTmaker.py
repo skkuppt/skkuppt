@@ -33,13 +33,8 @@ def gpt_pptmaker(topic, details, apikey):
         ],
     )
 
-    # get the response content only
-    print(completion.choices[0].message.content)
-    slides = completion.choices[0].message.content.split("Slide")
-    slides = slides[1:]
-
-    slides = ["Slide" + slide.strip() for slide in slides]
-    return slides
+    # get the response content only    
+    return completion.choices[0].message.content
 
 
 
