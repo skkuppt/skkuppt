@@ -30,18 +30,24 @@
   --color-forestgreen: #06a92a;
   --color-mediumslateblue: #205bf3;
   --color-black: #000;
-    
+  --color-springgreen: #32fe5e;
+  --color-mediumaquamarine: #75d19a;
+
+
+
 
   --gap-5xs: 8px;
   /* Paddings */
   --padding-3xs: 10px;
   --padding-26xl: 45px;
-  
+  --padding-6xl: 25px;
   /* Border radiuses */
-    --br-24xl: 43px;
+  --br-24xl: 43px;
   --br-base: 16px;
   --br-5xs: 8px;
   --br-4xs: 9px;
+  --br-3xs: 10px;
+  --br-8xs: 5px;
 }
 
 
