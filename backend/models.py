@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Text
 from sqlalchemy.orm import relationship
 
 from database import Base
@@ -15,10 +15,8 @@ class Question(Base):
     __tablename__ = "question"
 
     id=Column(Integer, primary_key=True)
-    content=Column(String(255), nullable=False)
-    # 모델쪽에서 요청하는 프롬프트 데이터 입력하기
-
-
+    topic=Column(Text, nullable=False)
+    content=Column(Text, nullable=False)
     create_date = Column(DateTime, nullable=False)
-    user_id = Column(Integer, ForeignKey("user.id"), nullable=True)
+    user_id = Column(Integer, ForeignKey("user.id"), nullable=False)
     user = relationship("User", backref="question_users")

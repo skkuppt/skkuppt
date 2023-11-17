@@ -22,4 +22,4 @@ app.add_middleware(
 )
 
 app.include_router(user_router.router)
-# app.include_router(question_router.router)
+app.include_router(question_router.router)
