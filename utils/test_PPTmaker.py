@@ -7,7 +7,7 @@ class TestPPTMaker(unittest.TestCase):
     def test_create_ppt(self):
         # Test case 1: Check if the function returns a string
         result = gpt_pptmaker("nothing", "",\
-                               "")
+                               "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")
         self.assertIsInstance(result[0], str)
         
         # Test case 2: Check if the function returns the correct output

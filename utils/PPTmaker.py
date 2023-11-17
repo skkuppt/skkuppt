@@ -46,6 +46,6 @@ def gpt_pptmaker(topic, details, apikey):
 if __name__ == '__main__':
     topic = "What is the meaning of life?"
     details = "The meaning of life is to be happy and useful."
-    apikey = ""
+    apikey = "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"
     print(gpt_pptmaker(topic, details, apikey))
     
