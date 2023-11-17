@@ -7,7 +7,7 @@ import styles from "./login.module.css";
 
 const Desktop2 = () => {
   return (
-  <form action='/api/login' method='POST'>
+  <form action='locslhody:8000/api/user/login' method='POST'>
     <div className={styles.desktop2}>
       <div className={styles.login1}>
         <div className={styles.login1Inner}>
