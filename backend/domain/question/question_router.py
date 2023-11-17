@@ -7,7 +7,7 @@ from database import get_db
 from domain.question import question_schema, question_crud
 from domain.user.user_router import get_current_user
 from models import User
-# from utils/PPTmaker import gpt_pptmaker
+# from utils.PPTmaker import gpt_pptmaker
 
 # 라우팅이란 FastAPI가 요청받은 URL을 해석하여 그에 맞는 함수를 실행하여 그 결과를 리턴하는 행위를 말한다.
 

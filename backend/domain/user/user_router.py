@@ -37,6 +37,12 @@ def user_create(_user_create: user_schema.UserCreate, db: Session = Depends(get_
                             detail="이미 존재하는 사용자입니다.")
     user_crud.create_user(db=db, user_create=_user_create)
 
+@router.delete("/delete", status_code=status.HTTP_204_NO_CONTENT)
+def user_delete(_user_delete: user_schema.UserDelete, db: Session = Depends(get_db)):
+    if not user_crud.delete_user(db=db, user_delete=_user_delete):
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail="사용자 정보가 일치하지 않습니다.")
+
 
 @router.post("/login", response_model=user_schema.Token)
 def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(),
