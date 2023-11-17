@@ -1,36 +1,33 @@
 import Cookies from "cookies";
 import { clientPromise, queryPromise } from "../../lib/mysql";
+import Link from "next/link";
 const { createHash } = require("node:crypto");
 
 export default async function handler(req, res) {
   if (req.method == "POST") {
     const username = req.body["username"];
-    const guess = req.body["password"];
+    const password = req.body["password"];
 
-    await clientPromise.connect();
-
-    let sql = `select * from users where username = "${username}"`;
-    try {
-      const result = await queryPromise(sql);
-      if (result.length == 0) {
-        res.redirect("/login?msg=Incorrect username or password");
-        return;
+    
+     await fetch('http://localhost:8000/api/user/login', {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: new URLSearchParams({
+        'username': username,
+        'password': password,
+        'grant_type': 'password'
+      })
+    }).then((response) => {
+      if(response.status == 200){
+        res.redirect("/"); // ppt maker 주소
       }
-
-      let user = result[0];
-
-      const guess_hash = createHash("sha256").update(guess).digest("hex");
-
-      if (guess_hash == user.password) {
-        const cookies = new Cookies(req, res);
-        cookies.set("username", username);
-        res.redirect("/");
-      } else {
+      else{
         res.redirect("/login?msg=Incorrect username or password");
       }
-    } catch (err) {
-      console.error(err);
-    }
+    })
+
   } else {
     res.redirect("/");
   }

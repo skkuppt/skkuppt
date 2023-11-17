@@ -81,7 +81,8 @@ const Desktop5 = () => {
                 <div className={styles.groupItem} />
                 <div className={styles.emailValidation}><input 
                   type="text" 
-                  name="email" 
+                  name="email"
+                  id = "email" 
                   placeholder="Enter your email" 
                   required 
                   className={styles.input} // 스타일을 위한 클래스
