@@ -39,4 +39,4 @@ class QuestionDelete(BaseModel):
     question_id: int
 
 class QuestionAnswer(BaseModel):
-    answer: str
+    answer_list: list[str] = []

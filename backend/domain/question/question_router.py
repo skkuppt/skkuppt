@@ -7,7 +7,7 @@ from database import get_db
 from domain.question import question_schema, question_crud
 from domain.user.user_router import get_current_user
 from models import User
-# from utils.PPTmaker import gpt_pptmaker
+from domain.util.PPTmaker import gpt_pptmaker
 
 # 라우팅이란 FastAPI가 요청받은 URL을 해석하여 그에 맞는 함수를 실행하여 그 결과를 리턴하는 행위를 말한다.
 
@@ -37,13 +37,14 @@ def question_create(_question_create: question_schema.QuestionCreate,
     question_crud.create_question(db=db,question_create=_question_create,
                                   user=current_user)
     
-    answer = question_schema.QuestionAnswer(answer="test")
-    return answer
+    # answer = question_schema.QuestionAnswer(answer="test")
+    # return answer
     # 모델 프롬프트에 필요한 데이터를 받아와서 데이터베이스에 저장하고  
     
-    # 어떻게 반환 되는지 확인해와야 함.
-    # answer = question_schema.QuestionAnswer(answer=gpt_pptmaker(_question_create.topic, _question_create.content, _question_create.apikey))
-    # return answer
+    # 어떻게 반환 되는지 확인해와야 함._question_create.apikey
+    answer = gpt_pptmaker(_question_create.topic, _question_create.content, _question_create.apikey )
+
+    return answer
     
 
 @router.put("/update/{question_id}",status_code=status.HTTP_204_NO_CONTENT)
