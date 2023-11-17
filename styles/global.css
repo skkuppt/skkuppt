@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap");
 
 :root {
   --primary: #0ced6a;
@@ -10,7 +12,39 @@
   --light-background: #2b2a2a;
   --font-color: white;
   --light-font: #aabbc3;
+  
+  /*font*/
+  --font-poppins: Poppins;
+  --font-size-base: 16px;
+  --font-size-mini: 15px;
+  --font-size-3xl: 22px;
+  --font-inter: Inter;
+  --font-size-13xl: 32px;
+
+  /* Colors */
+  --color-white: #fff;
+  --color-cornflowerblue-100: #a3b1ff;
+  --color-cornflowerblue-200: #a7a3ff;
+  --color-lightgoldenrodyellow: #c8ffd4;
+  --color-yellowgreen: #67c347;
+  --color-forestgreen: #06a92a;
+  --color-mediumslateblue: #205bf3;
+  --color-black: #000;
+    
+
+  --gap-5xs: 8px;
+  /* Paddings */
+  --padding-3xs: 10px;
+  --padding-26xl: 45px;
+  
+  /* Border radiuses */
+    --br-24xl: 43px;
+  --br-base: 16px;
+  --br-5xs: 8px;
+  --br-4xs: 9px;
 }
+
+
 
 body {
   padding: 0;
@@ -19,6 +53,8 @@ body {
   color: var(--font-color);
   text-align: center;
   font-family: 'Open Sans', sans-serif;
+  margin: 0;
+  line-height: normal;
 }
 
 strong { 
@@ -36,14 +72,14 @@ a:hover {
 }
 
 button,input[type=submit] {
-  padding: 10px;
-  padding-left: 20px;
-  padding-right: 20px;
-  border-radius: 15px;
-  background-color: transparent;
+  padding: 16px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 10px;
+  background-color: ;
   color: var(--font-color);
   cursor: pointer;
-  border: 2px solid var(--primary);
+  border: ;
   transition: 0.2s;
   font-size: 17px;
 }
@@ -55,15 +91,17 @@ button:hover,input[type=submit]:hover {
 input[type=text],input[type=password],input[type=emailVerification] {
   padding: 10px;
   border-radius: 30px;
-  border: 2px solid var(--primary);
+  border:var(--primary);
   background-color: transparent;
   outline: none;
   font-size: 15px;
   transition: 0.2s;
   width: 200px;
   margin-bottom: 30px;
-  color: var(--font-color);
+  color: ;
   text-align: center;
+  font :--font-poppins;
+  
 }
 
 input[type=text]:focus,input[type=password],input[type=emailVerification]:focus {
