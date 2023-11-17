@@ -1,7 +1,7 @@
 import Layout from '../components/layout'
 import { getCookie } from 'cookies-next';
 import Link from 'next/link'
-import clientPromise from "../lib/mongodb";
+import clientPromise from "../node_modules/mongodb";
 
 export default function ProfilePage( {username, created} ) {
     return (
