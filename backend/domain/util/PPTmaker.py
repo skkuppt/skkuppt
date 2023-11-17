@@ -29,18 +29,14 @@ def gpt_pptmaker(topic, details, apikey):
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": "You are making ppt for the class, skilled in making index and its belongings.\
-              showing only the title and content of the slides without other flowery words or summary."},
+              showing only the title and content of the slides without other flowery words or summary or etc."},
             {"role": "user", "content": prompt}
         ],
     )
-
-    # get the response content only
-    print(completion.choices[0].message.content)
-    slides = completion.choices[0].message.content.split("Slide")
-    slides = slides[1:]
-
-    slides = ["Slide" + slide.strip() for slide in slides]
-    return slides
+    # get format of messege contetn
+    print(type(completion.choices[0].message.content))
+    # get the response content only    
+    return completion.choices[0].message.content
 
 
 
