@@ -30,18 +30,10 @@ def question_detail(question_id: int, db: Session = Depends(get_db)):
     question = question_crud.get_question(db,question_id=question_id)
     return question
 
-@router.post("/create", response_model=question_schema.QuestionAnswer)
+@router.post("/create")
 def question_create(_question_create: question_schema.QuestionCreate,
-                    db: Session = Depends(get_db),
-                    current_user: User = Depends(get_current_user)):
-    question_crud.create_question(db=db,question_create=_question_create,
-                                  user=current_user)
+                    db: Session = Depends(get_db)):
     
-    # answer = question_schema.QuestionAnswer(answer="test")
-    # return answer
-    # 모델 프롬프트에 필요한 데이터를 받아와서 데이터베이스에 저장하고  
-    
-    # 어떻게 반환 되는지 확인해와야 함._question_create.apikey
     answer = gpt_pptmaker(_question_create.topic, _question_create.content, _question_create.apikey )
 
     return answer
