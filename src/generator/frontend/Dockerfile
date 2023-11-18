@@ -14,4 +14,9 @@ COPY . .
 
 EXPOSE 8080 
 
-CMD ["python3", "gunicorn_run.py"]
+ENV GUNICORN_WORKERS=3
+
+COPY entrypoint.sh .
+RUN chmod +x entrypoint.sh
+ENTRYPOINT ["./entrypoint.sh"]
+
