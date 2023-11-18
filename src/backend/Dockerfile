@@ -1,8 +1,9 @@
-FROM rockylinux/rockylinux:9.2
+FROM ubuntu:latest
 
-RUN dnf -y update && \
-    dnf -y install gcc make python3 python3-pip python3-devel && \
-    dnf clean all
+RUN apt-get update \
+    && apt-get update \
+    && apt-get upgrade -y \
+    && apt-get install -y python3 python3-pip python3-dev
 
 WORKDIR /app
 
@@ -15,3 +16,4 @@ COPY . .
 EXPOSE 8000
 
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+

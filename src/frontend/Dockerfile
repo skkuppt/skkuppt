@@ -1,8 +1,8 @@
-FROM rockylinux/rockylinux:9.2
+FROM ubuntu:latest
 
-RUN dnf -y update && \
-    dnf -y install gcc make python3 python3-pip python3-devel && \
-    dnf clean all
+RUN apt-get update \
+    && apt-get upgrade -y \
+    && apt-get install -y python3 python3-pip python3-dev
 
 WORKDIR /app
 
@@ -14,6 +14,7 @@ COPY . .
 
 EXPOSE 8080 
 
-CMD ["gunicorn", "--bind", "0.0.0.0:8080", "skkuppt.wsgi:application"]
+#CMD ["gunicorn", "--bind", "0.0.0.0:8080", "skkuppt.wsgi:application"]
+CMD ["python3", "manage.py", "runserver","0.0.0.0:8080"]
 
 
