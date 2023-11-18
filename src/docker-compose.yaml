@@ -2,3 +2,55 @@
 #    web:
 #build: .
 #command: gunicorn ppt-demo.wsgi:application --bind 0.0.0.0:8000
+
+version: '3'
+
+services:
+  frontend:
+    build:
+      context: frontend/
+    command: gunicorn skkuppt.wsgi:application --bind 0.0.0.0:${FRONTEND_PORT}
+    environment:
+      - VIRTUAL_HOST=${VIRTUAL_HOST}
+      - LETSENCRYPT_HOST=${LETSENCRYPT_HOST}
+      - LETSENCRYPT_EMAIL=${LETSENCRYPT_EMAIL}
+      - FRONTEND_PORT=${FRONTEND_PORT}
+      - FRONTEND_HOST=${FRONTEND_HOST}
+      - BACKEND_PORT=${BACKEND_PORT}
+      - BACKEND_HOST=${BACKEND_HOST}
+    ports:
+      - ${FRONTEND_PORT}:${FRONTEND_PORT}
+
+  backend:
+    build:
+      context: backend/
+    command: uvicorn main:app --host 0.0.0.0 --port ${BACKEND_PORT} 
+    ports:
+      - ${BACKEND_PORT}:${BACKEND_PORT}
+    environment:
+      - FRONTEND_PORT=${FRONTEND_PORT}
+      - FRONTEND_HOST=${FRONTEND_HOST}
+      - BACKEND_PORT=${BACKEND_PORT}
+      - BACKEND_HOST=${BACKEND_HOST}
+
+  nginx-proxy:
+    image: nginxproxy/nginx-proxy:latest
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /etc/nginx/certs
+      - /etc/nginx/vhost.d
+      - /usr/share/nginx/html
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+
+  nginx-letsencrypt:
+    image: nginxproxy/acme-companion:latest
+    container_name: nginx-letsencrypt
+    environment:
+      - DEFAULT_EMAIL=${DEFAULT_EMAIL}
+    volumes_from:
+      - nginx-proxy
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
