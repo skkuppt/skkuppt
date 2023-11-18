@@ -3,7 +3,7 @@ import os
 
 
 def gpt_pptmaker(topic, details):
-    apikey = os.environ.get("OPENAI_API_KEY", "")
+    apikey = os.environ.get("OPENAI_API_KEY", "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")
     client = OpenAI(
         api_key=apikey,
     )

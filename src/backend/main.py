@@ -19,6 +19,7 @@ origins = [
     'http://127.0.0.1:8080',
     'http://127.0.0.1:80',
     f'http://{FRONTEND_HOST}:{FRONTEND_PORT}',
+    'https://skkuppt.intueri.cloud',
 ]
 
 app.add_middleware(
