@@ -1,8 +1,3 @@
-#MD [uvicorn, main:app, --host, 0.0.0.0, --port, 8000]
-#    web:
-#build: .
-#command: gunicorn ppt-demo.wsgi:application --bind 0.0.0.0:8000
-
 version: '3'
 
 services:
