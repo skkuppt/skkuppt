@@ -27,8 +27,8 @@ def gpt_pptmaker(topic, details):
     """
 
     completion = client.chat.completions.create(
-        # model="gpt-3.5-turbo",
-        model="gpt-4",
+        #model="gpt-4",
+        model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": "You are making ppt for the class, skilled in making index and its belongings.\
               showing only the title and content of the slides without other flowery words or summary or etc."},
