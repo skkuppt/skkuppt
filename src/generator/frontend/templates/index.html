@@ -8,15 +8,25 @@
     <div class="carousel-item active">
       <div class="d-flex justify-content-center align-items-center" style="min-height: 400px;">
         <div class="text-center">
-          <h1 class="display-4">Welcome to SKKU PPT!</h1>
-          <p class="lead">Experience the power of GPT in your presentations.</p>
+          <h1 class="display-4">SKKU PPT</h1>
+          <p class="lead">AI-powered PPT Generator</p>
+
+            <img src="https://avatars.githubusercontent.com/u/145848570?s=400&u=92aa7c5503f934b13359edb0a1af30d2192fcada&v=4" alt="First slide" class="d-block w-100">
+            <hr/>
+
+
           {% if request.user.is_authenticated %}
-            <p class="mb-2">Hello, {{ request.user.username }}!</p>
-            <a href="{% url 'logout' %}" class="btn btn-primary">Logout</a>
+          <p class="lead">Hello, {{ request.user.username }}!</p>
+          <a href="/rest_api/create_ppt" class="btn btn-primary">Create PPT</a>
+            <a href="{% url 'logout' %}" class="btn btn-info">Logout</a>
+            <hr/>
           {% else %}
             <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
             <a href="{% url 'signup' %}" class="btn btn-secondary">Signup</a>
+            <hr/>
           {% endif %}
+
+
         </div>
       </div>
     </div>
