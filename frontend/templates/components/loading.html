@@ -1,0 +1,20 @@
+<div class="d-flex justify-content-center mt-4">
+    <div class="spinner-border text-primary" role="status" id="loadingSpinner" style="display: none;">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+<style>
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+</style>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var form = document.querySelector('form');
+        form.onsubmit = function() {
+            document.getElementById('loadingSpinner').style.display = 'block';
+            form.querySelector('[type="submit"]').disabled = true
+        };
+    });
+</script>

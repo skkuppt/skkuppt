@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block main_area %}
+
+
+        <!-- title, contents 입력 -->
+        {% include 'components/rest_api/create_ppt/input.html' %}
+
+        <!-- 로딩 중 -->
+        {% include 'components/loading.html' %}
+
+        <!-- 슬라이드 보여주는 곳 -->
+        {% include 'components/rest_api/create_ppt/output.html' %}
+
+{% endblock %}
