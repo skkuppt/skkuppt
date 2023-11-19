@@ -1,7 +1,5 @@
-
 <html lang="en">
-
-<head>
+  <head>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -11,45 +9,31 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
       .loader {
-        border: 5px solid #f3f3f3; /* Light grey */
-        border-top: 5px solid #3498db; /* Blue */
-        border-radius: 50%;
-        width: 50px;
-        height: 50px;
-        animation: spin 2s linear infinite;
-        margin: 2em auto;
-        display: none; /* Hidden by default */
-    }
-    @keyframes spin {
+      border: 5px solid #f3f3f3; /* Light grey */
+      border-top: 5px solid #3498db; /* Blue */
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 2s linear infinite;
+      margin: 2em auto;
+      display: none; /* Hidden by default */
+      }
+      @keyframes spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
-  }
-</style>
-
-</head>
-<body>
+      }
+    </style>
+  </head>
+  <body>
     <!-- Navbar -->
-
     {% include 'components/navbar.html' %}
-
     <div class="container mt-5">
-
-        {% block main_area %}
-
-        <!-- mail_area block -->
-
-        {% endblock %}
-
+      {% block main_area %}
+      <!-- mail_area block -->
+      {% endblock %}
     </div>
-      
     <!-- Footer -->
     {% include 'components/footer.html' %}
-</body>
-
-  
-
-  
-
-
-</body>
+  </body>
+  </body>
 </html>

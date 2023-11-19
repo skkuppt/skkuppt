@@ -5,17 +5,18 @@ from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 import os
 
+
 @login_required
 @csrf_exempt
-# http:<url>/api/create_ppt
+# http:<url>/rest_api/create_ppt/
 def create_ppt(request):
 
     if request.method == 'POST':
         topic = request.POST.get('topic')
         content = request.POST.get('content')
 
-        BACKEND_HOST=os.environ.get("BACKEND_HOST", "localhost")
-        BACKEND_PORT=os.environ.get("BACKEND_PORT", "8000")
+        BACKEND_HOST = os.environ.get("BACKEND_HOST", "localhost")
+        BACKEND_PORT = os.environ.get("BACKEND_PORT", "8000")
         response = requests.post(
             f'http://{BACKEND_HOST}:{BACKEND_PORT}/api/question/create',
             headers={'Content-Type': 'application/json'},
@@ -32,7 +33,8 @@ def create_ppt(request):
                 content_key = '\nContent:'
                 title_start = slide.find(title_key) + len(title_key)
                 content_start = slide.find(content_key) + len(content_key)
-                title = slide[title_start:slide.find('\n', title_start)].strip()
+                title = slide[title_start:slide.find(
+                    '\n', title_start)].strip()
                 tmp_list = title.split(": ")
                 if len(tmp_list) > 1:
                     title = tmp_list[-1]
@@ -44,7 +46,8 @@ def create_ppt(request):
     else:
         return JsonResponse({'error': 'Invalid method'}, status=405)
 
-# http:<url>/
+
 @login_required
+# http:<url>/rest_api/create_ppt
 def index(request):
     return render(request, 'create_ppt.html')
