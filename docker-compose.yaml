@@ -16,6 +16,8 @@ services:
       - DJANGO_DEBUG=${DJANGO_DEBUG}
     ports:
       - ${FRONTEND_PORT}:${FRONTEND_PORT}
+    volumes:
+      - sqlite-data:${SQLITE_FILE_NAME}
 
   backend:
     build:
