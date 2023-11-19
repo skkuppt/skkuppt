@@ -2,18 +2,18 @@ import requests
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
 import os
 
+@login_required
 @csrf_exempt
 # http:<url>/api/create_ppt
 def create_ppt(request):
 
     if request.method == 'POST':
-        # Extract the topic and content from the POST request
         topic = request.POST.get('topic')
         content = request.POST.get('content')
 
-        # Send the POST request to the API endpoint
         BACKEND_HOST=os.environ.get("BACKEND_HOST", "localhost")
         BACKEND_PORT=os.environ.get("BACKEND_PORT", "8000")
         response = requests.post(
@@ -22,7 +22,6 @@ def create_ppt(request):
             json={'topic': topic, 'content': content}
         )
 
-        # Process the JSON response to convert it into the desired format
         result = response.json()
         slides = {}
         answer = result.get('answer').split('\n\n')
@@ -41,11 +40,11 @@ def create_ppt(request):
                 slides[str(i)] = {'title': title, 'content': content}
 
         print(slides)
-        return render(request, 'index.html', {'slides': slides})
+        return render(request, 'create_ppt.html', {'slides': slides})
     else:
         return JsonResponse({'error': 'Invalid method'}, status=405)
 
 # http:<url>/
+@login_required
 def index(request):
-    # Render the index page with no context if not called by create_ppt
-    return render(request, 'index.html')
+    return render(request, 'create_ppt.html')
