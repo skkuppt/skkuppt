@@ -20,7 +20,8 @@ def create_ppt(request):
         response = requests.post(
             f'http://{BACKEND_HOST}:{BACKEND_PORT}/api/question/create',
             headers={'Content-Type': 'application/json'},
-            json={'topic': topic, 'content': content}
+            json={'topic': topic, 'content': content},
+            timeout=600 # s
         )
 
         result = response.json()
