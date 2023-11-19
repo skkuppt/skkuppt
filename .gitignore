@@ -132,3 +132,10 @@ dist
 # pycache는 깃에 올리면 안됩니다.
 *.pyc
 *__pycache__/
+
+# Vim 관련
+*.swo
+*.swp
+*.swn
+*.swm
+*.swl

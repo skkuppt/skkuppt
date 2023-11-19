@@ -1,9 +1,23 @@
 version: "3"
 
 services:
+  db:
+    image: mariadb:lts-jammy
+    container_name: db 
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - db-volume:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
   frontend:
     build:
       context: frontend/
+    container_name: frontend 
     environment:
       - VIRTUAL_HOST=${VIRTUAL_HOST}
       - LETSENCRYPT_HOST=${LETSENCRYPT_HOST}
@@ -14,14 +28,24 @@ services:
       - BACKEND_HOST=${BACKEND_HOST}
       - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
       - DJANGO_DEBUG=${DJANGO_DEBUG}
+      - DB_HOST=${DB_HOST} 
+      - DB_PORT=${DB_PORT} 
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_DATABASE=${DB_DATABASE}
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - IS_PROD=1
     ports:
       - ${FRONTEND_PORT}:${FRONTEND_PORT}
-    volumes:
-      - sqlite-data:${SQLITE_FILE_NAME}
-
+    depends_on:
+      - db 
+  
   backend:
     build:
       context: backend/
+    container_name: backend 
     ports:
       - ${BACKEND_PORT}:${BACKEND_PORT}
     environment:
@@ -52,3 +76,6 @@ services:
       - nginx-proxy
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
+
+volumes:
+  db-volume:
