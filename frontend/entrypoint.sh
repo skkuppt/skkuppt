@@ -5,5 +5,7 @@ if [ -z "$WORKERS" ]; then
   WORKERS=$(( 2 * CORES + 1 ))
 fi
 
+python3 manage.py makemigrations
+python3 manage.py migrate
 exec gunicorn --workers $WORKERS --bind 0.0.0.0:8080 config.wsgi:application
 
