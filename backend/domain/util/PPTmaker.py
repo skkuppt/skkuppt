@@ -3,7 +3,7 @@ import os
 
 
 def gpt_pptmaker(topic, details):
-    apikey = os.environ.get("OPENAI_API_KEY", "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")
+    apikey = os.environ.get("OPENAI_API_KEY")
     client = OpenAI(
         api_key=apikey,
     )
@@ -27,7 +27,7 @@ def gpt_pptmaker(topic, details):
     """
 
     completion = client.chat.completions.create(
-        #model="gpt-4",
+        # model="gpt-4",
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": "You are making ppt for the class, skilled in making index and its belongings.\
@@ -44,5 +44,5 @@ def gpt_pptmaker(topic, details):
 if __name__ == '__main__':
     topic = "What is the meaning of life?"
     details = "The meaning of life is to be happy and useful."
-    apikey = "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"
+    apikey = os.environ.get("OPENAI_API_KEY")
     print(gpt_pptmaker(topic, details))
