@@ -1,11 +1,10 @@
 #!/bin/bash
 
-sudo docker stop backend 
-sudo docker stop frontend 
-sudo docker rm backend 
-sudo docker rm frontend 
+make down service=frontend
+make down service=backend
 
-sudo docker-compose up -d --build backend
-sudo docker-compose up -d --build frontend 
+make pull service=frontend
+make pull service=backend
 
-
+make up service=frontend
+make up service=backend
