@@ -17,6 +17,8 @@ services:
   frontend:
     image: yspkm/skkuppt-frontend:latest
     container_name: frontend
+    build:
+      context: frontend
     environment:
       - VIRTUAL_HOST=${VIRTUAL_HOST}
       - LETSENCRYPT_HOST=${LETSENCRYPT_HOST}
@@ -36,6 +38,7 @@ services:
       - MYSQL_USER=${DB_USER}
       - MYSQL_PASSWORD=${DB_PASSWORD}
       - IS_PROD=1
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
     ports:
       - ${FRONTEND_PORT}:${FRONTEND_PORT}
     depends_on:
@@ -43,6 +46,8 @@ services:
 
   backend:
     image: yspkm/skkuppt-backend:latest
+    build:
+      context: backend 
     container_name: backend
     ports:
       - ${BACKEND_PORT}:${BACKEND_PORT}

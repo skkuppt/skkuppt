@@ -12,6 +12,49 @@ logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 
+openai_api_key = os.getenv('OPENAI_API_KEY')
+openai_model = 'gpt-3.5-turbo'
+headers = {
+    "Content-Type": "application/json",
+    "Authorization": f"Bearer {openai_api_key}"
+}
+
+system_role_content = {"role": "system", "content": "You are making ppt for the class, skilled in making index and its belongings.showing only the title and content of the slides without other flowery words or summary or etc."}
+url = "https://api.openai.com/v1/chat/completions"
+
+
+
+
+def get_prompt(topic:str, details:str)->str:
+    prompt = f"""
+    make a powerpoint presentation about {topic} with the following details:
+    {details}
+    In the structure of:
+    Slide 1:
+    Title:
+    Content:
+    Slide 2:
+    Title:
+    Content:
+    ...  
+    Slide n:
+    Title:
+    Content:
+    Only write the title of the slides and its content. 
+    """
+    return prompt
+
+def get_data(topic:str, details:str)->dict:
+	prompt=get_prompt(topic, details)
+	user_role_content = {"role": "user", "content": prompt}
+	data = {
+    	"model": "gpt-3.5-turbo",
+    	"messages": [system_role_content, user_role_content],
+    	"temperature": 0.7
+	}
+	return data
+
+
 @login_required
 def index(request):
     logger.info('Rendering index page for create_ppt')
@@ -36,12 +79,13 @@ def create_ppt(request):
             try:
                 BACKEND_HOST = os.environ.get("BACKEND_HOST", "localhost")
                 BACKEND_PORT = os.environ.get("BACKEND_PORT", "8000")
-                response = requests.post(
-                    f'http://{BACKEND_HOST}:{BACKEND_PORT}/api/question/create',
-                    headers={'Content-Type': 'application/json'},
-                    json={'topic': topic, 'details': details}
-                )
-                response.raise_for_status()  # This will raise an HTTPError if the HTTP request returned an unsuccessful status code
+                #response = requests.post(
+                    #f'http://{BACKEND_HOST}:{BACKEND_PORT}/api/question/create',
+                    #headers={'Content-Type': 'application/json'},
+                    #json={'topic': topic, 'details': details}
+                #)
+                response = requests.post(url=url, headers=headers, json=get_data(topic, details))
+                response.raise_for_status()  
                 
                 result = response.json()
                 queue.put(result)
@@ -69,7 +113,8 @@ def create_ppt(request):
             return JsonResponse({'error': 'Backend service did not respond correctly'}, status=500)
 
         slides = {}
-        answer = result.get('answer', '').split('\n\n')
+
+        answer = result['choices'][0]['message']['content'].split('\n\n')
         for i, slide in enumerate(answer, start=1):
             if slide:
                 title_key = f'Slide {i}:\nTitle:'

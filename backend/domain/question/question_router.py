@@ -17,8 +17,9 @@ router = APIRouter(
 
 
 @router.post("/create")
-def question_create(_question_create: question_schema.QuestionCreate):
+# async를 붙여줘야 합니다.
+async def question_create(_question_create: question_schema.QuestionCreate):
 
     answer = gpt_pptmaker(_question_create.topic, _question_create.details)
-
+    # 응답은 JSON으로 하는게 일반적입니다.
     return JSONResponse(content={"answer": answer})

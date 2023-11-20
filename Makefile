@@ -1,10 +1,10 @@
-.PHONY: pull up down help logs
+.PHONY: pull up down help logs build
 
 SERVICES := db frontend backend nginx-proxy nginx-letsencrypt
 
 help:
 	@echo "Usage: make [action] service=<service>"
-	@echo "  action: pull, up, down, logs"
+	@echo "  action: pull, up, down, logs, build"
 	@echo "  service: all, $(SERVICES)"
 
 check-service:
@@ -21,6 +21,13 @@ pull: check-service
 		sudo docker-compose pull; \
 	else \
 		sudo docker-compose pull $(service); \
+	fi
+
+build: check-service
+	@if [ "$(service)" = "all" ]; then \
+		sudo docker-compose build; \
+	else \
+		sudo docker-compose build $(service); \
 	fi
 
 up: check-service
