@@ -1,10 +1,10 @@
-.PHONY: build up down help
+.PHONY: build up down help logs
 
 SERVICES := db frontend backend nginx-proxy nginx-letsencrypt
 
 help:
 	@echo "Usage: make [action] service=<service>"
-	@echo "  action: build, up, down"
+	@echo "  action: build, up, down, logs"
 	@echo "  service: all, $(SERVICES)"
 
 check-service:
@@ -18,22 +18,28 @@ endif
 
 build: check-service
 	@if [ "$(service)" = "all" ]; then \
-		docker-compose build; \
+		sudo docker-compose build; \
 	else \
-		docker-compose build $(service); \
+		sudo docker-compose build $(service); \
 	fi
 
 up: check-service
 	@if [ "$(service)" = "all" ]; then \
-		docker-compose up -d; \
+		sudo docker-compose up -d; \
 	else \
-		docker-compose up -d $(service); \
+		sudo docker-compose up -d $(service); \
 	fi
 
 down: check-service
 	@if [ "$(service)" = "all" ]; then \
-		docker-compose down; \
+		sudo docker-compose down; \
 	else \
-		docker-compose stop $(service); \
+		sudo docker-compose stop $(service); \
 	fi
 
+logs: check-service
+	@if [ "$(service)" = "all" ]; then \
+		echo "Log는 서비스당 한 개씩만 가능"; \
+	else \
+		sudo docker-compose logs -f $(service); \
+	fi
