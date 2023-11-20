@@ -41,7 +41,6 @@ def create_ppt(request):
                 content = slide[content_start:].strip()
                 slides[str(i)] = {'title': title, 'content': content}
 
-        print(slides)
         return render(request, 'create_ppt.html', {'slides': slides})
     else:
         return JsonResponse({'error': 'Invalid method'}, status=405)
