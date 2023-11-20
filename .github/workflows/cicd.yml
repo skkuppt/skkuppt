@@ -1,17 +1,30 @@
-name: Build and Push Docker Images
+name: Django & Docker CI/CD
 
 on:
   push:
-    branches: [ master ]
+    branches: [ "master" ]
   pull_request:
-    branches: [ master ]
+    branches: [ "master" ]
 
 jobs:
-  build-frontend:
+  test:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v2
+    - uses: actions/checkout@v3
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r frontend/requirements.txt
+    - name: Run Tests
+      run: |
+        cd frontend
+        python manage.py test
+
+  build-frontend:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
     - name: Login to Docker Hub
@@ -28,10 +41,10 @@ jobs:
         tags: yspkm/skkuppt-frontend:latest
 
   build-backend:
+    needs: test
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
     - name: Login to Docker Hub
@@ -46,3 +59,4 @@ jobs:
         file: ./backend/Dockerfile
         push: true
         tags: yspkm/skkuppt-backend:latest
+
