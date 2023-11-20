@@ -3,7 +3,7 @@ version: "3"
 services:
   db:
     image: mariadb:lts-jammy
-    container_name: db 
+    container_name: db
     environment:
       - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
       - MYSQL_DATABASE=${DB_DATABASE}
@@ -17,7 +17,7 @@ services:
   frontend:
     build:
       context: frontend/
-    container_name: frontend 
+    container_name: frontend
     environment:
       - VIRTUAL_HOST=${VIRTUAL_HOST}
       - LETSENCRYPT_HOST=${LETSENCRYPT_HOST}
@@ -28,8 +28,8 @@ services:
       - BACKEND_HOST=${BACKEND_HOST}
       - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
       - DJANGO_DEBUG=${DJANGO_DEBUG}
-      - DB_HOST=${DB_HOST} 
-      - DB_PORT=${DB_PORT} 
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
       - DB_USER=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD}
       - DB_DATABASE=${DB_DATABASE}
@@ -40,12 +40,12 @@ services:
     ports:
       - ${FRONTEND_PORT}:${FRONTEND_PORT}
     depends_on:
-      - db 
-  
+      - db
+
   backend:
     build:
       context: backend/
-    container_name: backend 
+    container_name: backend
     ports:
       - ${BACKEND_PORT}:${BACKEND_PORT}
     environment:
