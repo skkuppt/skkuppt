@@ -13,14 +13,14 @@ def create_ppt(request):
 
     if request.method == 'POST':
         topic = request.POST.get('topic')
-        content = request.POST.get('content')
+        details = request.POST.get('details')
 
         BACKEND_HOST = os.environ.get("BACKEND_HOST", "localhost")
         BACKEND_PORT = os.environ.get("BACKEND_PORT", "8000")
         response = requests.post(
             f'http://{BACKEND_HOST}:{BACKEND_PORT}/api/question/create',
             headers={'Content-Type': 'application/json'},
-            json={'topic': topic, 'content': content}
+            json={'topic': topic, 'details': details}
         )
 
         result = response.json()
